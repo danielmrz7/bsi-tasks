@@ -15,3 +15,48 @@ Existem diferentes notações padronizadas para representar Modelos Entidade-Rel
 * **Notação de Chen (Original):** Utiliza retângulos para entidades, losangos para relacionamentos e círculos (elipses) para os atributos conectados às entidades. As cardinalidades são indicadas por letras (`1:N`, `M:N`) ou pares numéricos sobre as linhas.
 * **Notação de Pé de Galinha (Information Engineering / Crow's Foot):** Muito utilizada em projetos relacionais modernos e ferramentas como o Mermaid.js. As entidades são caixas contendo os atributos, e os relacionamentos são linhas com símbolos nas pontas que indicam a cardinalidade (ex.: barras verticais para "um", e ramificações em forma de pé de galinha para "muitos").
 * **UML (Unified Modeling Language - Diagrama de Classes):** Utiliza classes para representar entidades, atributos dentro do corpo da classe e associações com multiplicidades explícitas (ex.: `1..*` ou `0..1`) nas pontas das linhas.
+
+## Q3. Diagrama ER (Nível Conceitual)
+
+```mermaid
+erDiagram
+    CLIENTE {
+        string codigo PK
+        string nome
+        string email_contato
+    }
+    PROJETO {
+        string codigo PK
+        string nome
+        string descricao
+    }
+    FUNCIONARIO {
+        string codigo PK
+        string nome
+        string email
+        string papel
+    }
+    SQUAD {
+        string codigo PK
+        string nome
+    }
+    TAREFA {
+        string codigo PK
+        string descricao
+        string prioridade
+        string situacao
+        float estimativa_horas
+    }
+    RELEASE {
+        string codigo PK
+        string data_planejada
+        string status_validacao
+    }
+
+    CLIENTE ||--o{ PROJETO : possui
+    PROJETO ||--o{ TAREFA : contem
+    SQUAD ||--o{ FUNCIONARIO : integra
+    SQUAD ||--o{ TAREFA : resolve
+    SQUAD ||--o{ RELEASE : planeja
+    CLIENTE ||--o{ RELEASE : recebe
+    RELEASE ||--o{ TAREFA : agrupa
