@@ -32,3 +32,18 @@ Se a gente guarda tudo em arquivos soltos pelo sistema, surgem vários problemas
 * **Consistência:** O banco precisa respeitar as regras matemáticas e lógicas. Se você não tem limite de cheque especial, uma transferência não pode deixar sua conta negativa.
 * **Isolamento:** Duas requisições simultâneas não podem bater cabeça. Se você passar o cartão duas vezes no exato mesmo milissegundo, o sistema não pode ler o saldo antigo para aprovar as duas, ignorando que o dinheiro só dava pra uma.
 * **Durabilidade:** Viu a tela de "Sucesso"? Tá salvo de verdade. Se o servidor da TIM ou do banco reiniciar um segundo depois, o dado já tem que estar gravado no disco físico e não pode se perder.
+
+
+**Q4. Qual propriedade ACID falhou?**
+
+* **a) Queda de energia e dinheiro sumiu:** Falhou a **Atomicidade**. Fez o débito, não fez o crédito e não teve a capacidade de desfazer a metade que já tinha rodado.
+* **b) Atendentes debitando o mesmo saldo:** Falhou o **Isolamento**. As transações atropelaram umas às outras, lendo dados desatualizados porque aconteceram ao mesmo tempo.
+* **c) Sistema reiniciou e o dado sumiu:** Falhou a **Durabilidade**. O commit informou que salvou, mas a gravação não resistiu à reinicialização.
+* **d) Transferência bloqueada por limite de saldo:** A **Consistência** funcionou perfeitamente aqui. O SGBD interveio e barrou a operação para proteger a regra de negócio.
+
+**Q5. Como o SGBD cuida da base**
+
+* **Recuperação:** É o plano de resgate. O SGBD anota tudo num arquivo de log à parte. Deu erro de hardware? Ele lê o log e refaz (redo) ou desfaz (rollback) as transações incompletas.
+* **Integridade:** São as rédeas do sistema. O SGBD usa *constraints* para garantir que ninguém coloque uma string num campo de data, ou cadastre um CPF inválido.
+* **Redundância:** O SGBD estimula a normalização. Em vez de escrever todos os dados do cliente em cada venda, ele guarda só um ID e cruza as tabelas na hora da consulta.
+* **Inconsistência:** É curada cortando a redundância na raiz. Se o CPF existe em uma tabela só, é impossível ele estar diferente em outro lugar.
