@@ -16,3 +16,19 @@
 **Exemplos:**
 * **SGBDs:** PostgreSQL, MySQL, Oracle, MongoDB.
 * **Bancos de Dados:** O banco acadêmico do SIGAA, o banco de um app de delivery, ou um dataset de clima no Kaggle pronto pra ser minerado em Python.
+
+
+**Q2. O problema de usar Sistemas de Arquivos**
+
+Se a gente guarda tudo em arquivos soltos pelo sistema, surgem vários problemas graves:
+* **Redundância:** A mesma informação fica duplicada em vários cantos.
+* **Inconsistência:** Você altera o dado em um arquivo, esquece do outro, e a base passa a apresentar informações divergentes.
+* **Acesso difícil:** Para criar um filtro ou uma busca diferente, muitas vezes você precisa programar um script do zero só para ler o texto.
+* **Zero segurança:** Qualquer processo ou usuário com acesso à pasta pode corromper o arquivo inteiro.
+
+**Q3. Propriedades ACID (com exemplo de Transferência Bancária)**
+
+* **Atomicidade (Tudo ou Nada):** A operação não pode parar na metade. Se você manda 50 reais de transferência pra sua mãe, o dinheiro tem que sair da sua conta e cair na dela. Se falhar, tem que desfazer tudo; senão, o dinheiro sumiria no limbo.
+* **Consistência:** O banco precisa respeitar as regras matemáticas e lógicas. Se você não tem limite de cheque especial, uma transferência não pode deixar sua conta negativa.
+* **Isolamento:** Duas requisições simultâneas não podem bater cabeça. Se você passar o cartão duas vezes no exato mesmo milissegundo, o sistema não pode ler o saldo antigo para aprovar as duas, ignorando que o dinheiro só dava pra uma.
+* **Durabilidade:** Viu a tela de "Sucesso"? Tá salvo de verdade. Se o servidor da TIM ou do banco reiniciar um segundo depois, o dado já tem que estar gravado no disco físico e não pode se perder.
