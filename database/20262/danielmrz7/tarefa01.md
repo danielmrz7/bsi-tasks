@@ -47,3 +47,35 @@ Se a gente guarda tudo em arquivos soltos pelo sistema, surgem vários problemas
 * **Integridade:** São as rédeas do sistema. O SGBD usa *constraints* para garantir que ninguém coloque uma string num campo de data, ou cadastre um CPF inválido.
 * **Redundância:** O SGBD estimula a normalização. Em vez de escrever todos os dados do cliente em cada venda, ele guarda só um ID e cruza as tabelas na hora da consulta.
 * **Inconsistência:** É curada cortando a redundância na raiz. Se o CPF existe em uma tabela só, é impossível ele estar diferente em outro lugar.
+
+
+**Q6. Mini-projeto da Empresa de Software**
+
+**a) Entidades Principais:**
+Cliente, Projeto, Squad, Membro, Sprint, Tarefa, Release.
+
+**b) Atributos:**
+* **Cliente:** ID_Cliente, Nome, CNPJ.
+* **Projeto:** ID_Projeto, Titulo, Escopo.
+* **Squad:** ID_Squad, Nome_Equipe.
+* **Membro:** ID_Membro, Nome, Cargo (Dev, QA, Tech Lead, etc).
+* **Sprint:** ID_Sprint, Iteracao, Data_Inicio, Data_Fim.
+* **Tarefa:** ID_Tarefa, Descricao, Status (To Do, Doing, Done).
+* **Release:** ID_Release, Versao.
+
+**c) Relacionamentos:**
+* O **Cliente** é dono de *vários* **Projetos** (1:N).
+* O **Projeto** é assumido por *uma* **Squad** (1:1).
+* A **Squad** contém *vários* **Membros** (1:N).
+* O **Projeto** é dividido em *várias* **Sprints** (1:N).
+* A **Sprint** engloba *várias* **Tarefas** (1:N).
+* O **Projeto** gera *várias* **Releases** (1:N).
+* A **Release** empacota *várias* **Tarefas** (1:N).
+
+**d) Regras de Integridade Lógica:**
+* "Cada squad só pode ter um único Tech Lead alocado."
+* "Toda tarefa criada precisa, obrigatoriamente, ser jogada em alguma sprint."
+* "As datas das sprints de um mesmo projeto não podem encavalar ou se sobrepor."
+* "Uma release só aceita o vínculo de tarefas que estejam com o status cravado em 'Done/Concluído'."
+
+
