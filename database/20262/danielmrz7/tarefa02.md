@@ -83,3 +83,16 @@ A partir do Diagrama ER conceitual, o modelo relacional resultante é composto p
 
 6. **`release`**
    * Atributos: `codigo` (**PK**), `data_planejada`, `status_validacao`, `squad_codigo` (**FK** referenciando `squad(codigo)`), `cliente_codigo` (**FK** referenciando `cliente(codigo)`)
+
+
+
+## Q5. Restrições de Integridade Referencial
+
+As principais regras e restrições de integridade referencial que devem ser garantidas no esquema são:
+
+* **Vínculo de Projetos:** Um projeto só pode existir se estiver associado a um cliente válido e existente.
+* **Vínculo de Tarefas:** Toda tarefa deve pertencer obrigatoriamente a um projeto de cliente válido e existente.
+* **Atribuição de Funcionários:** Todo funcionário deve estar alocado a exatamente uma squad ativa.
+* **Responsabilidade de Tarefas:** Uma tarefa deve ser resolvida por uma squad responsável registrada.
+* **Planejamento de Releases:** Uma release deve ser planejada por uma squad específica e ser destinada a um cliente válido.
+* **Agrupamento em Releases:** As tarefas agrupadas em uma release devem pertencer a projetos do mesmo cliente para o qual a release foi planejada.
