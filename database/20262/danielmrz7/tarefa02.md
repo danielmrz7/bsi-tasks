@@ -60,3 +60,26 @@ erDiagram
     SQUAD ||--o{ RELEASE : planeja
     CLIENTE ||--o{ RELEASE : recebe
     RELEASE ||--o{ TAREFA : agrupa
+
+
+## Q4. Mapeamento para o Modelo Relacional
+
+A partir do Diagrama ER conceitual, o modelo relacional resultante é composto pelas seguintes tabelas (com chaves primárias **PK** e chaves estrangeiras **FK**):
+
+1. **`cliente`**
+   * Atributos: `codigo` (**PK**), `nome`, `email_contato`
+
+2. **`projeto`**
+   * Atributos: `codigo ` (**PK**), `nome`, `descricao`, `cliente_codigo` (**FK** referenciando `cliente(codigo)`)
+
+3. **`funcionario`**
+   * Atributos: `codigo` (**PK**), `nome`, `email`, `papel`, `squad_codigo` (**FK** referenciando `squad(codigo)`)
+
+4. **`squad`**
+   * Atributos: `codigo` (**PK**), `nome`
+
+5. **`tarefa`**
+   * Atributos: `codigo` (**PK**), `descricao`, `prioridade`, `situacao`, `estimativa_horas`, `projeto_codigo` (**FK** referenciando `projeto(codigo)`), `squad_codigo` (**FK** referenciando `squad(codigo)`), `release_codigo` (**FK** opcional referenciando `release(codigo)`)
+
+6. **`release`**
+   * Atributos: `codigo` (**PK**), `data_planejada`, `status_validacao`, `squad_codigo` (**FK** referenciando `squad(codigo)`), `cliente_codigo` (**FK** referenciando `cliente(codigo)`)
